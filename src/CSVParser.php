@@ -2,7 +2,7 @@
 
 namespace csvparser\src;
 
-use RuntimeException;
+use Exception;
 
 class CSVParser
 {
@@ -12,6 +12,7 @@ class CSVParser
 
     /**
      * @param string $filePath
+     * @throws Exception
      */
     public function __construct(string $filePath)
     {
@@ -22,6 +23,7 @@ class CSVParser
 
     /**
      * @return array
+     * @throws Exception
      */
     public function parse(): array
     {
@@ -39,7 +41,7 @@ class CSVParser
 
             fclose($handle);
         } else {
-            throw new RuntimeException('Cant open file for parsing');
+            throw new Exception('Cant open file for parsing');
         }
 
         return $result;

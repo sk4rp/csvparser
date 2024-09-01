@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
 
 use csvparser\src\CSVParser;
 use PHPUnit\Framework\TestCase;
@@ -7,6 +8,9 @@ class CSVParserTest extends TestCase
 {
     private CSVParser $parser;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $filePath = __DIR__ . '/test.csv';
@@ -29,6 +33,7 @@ class CSVParserTest extends TestCase
 
     /**
      * @return void
+     * @throws Exception
      */
     public function testParse(): void
     {
