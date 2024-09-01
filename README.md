@@ -11,11 +11,11 @@ CSV файлов. Парсер предоставляет методы для п
 
 2. Перейдите в директорию проекта:
    ```bash
-   cd csv-parser
+   cd simple-csv-parser
 
 3. Установите нужные зависимости:
    ```bash
-   composer install
+   composer require --dev phpunit/phpunit ^9
 
 ## Использование
 
