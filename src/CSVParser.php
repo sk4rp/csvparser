@@ -1,9 +1,10 @@
 <?php
+namespace csvparser\src;
 
 class CSVParser
 {
     private string $filePath;
-    private array $data = [];
+    private array $data;
 
     public function __construct(string $filePath, array $data)
     {
