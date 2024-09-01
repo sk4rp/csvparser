@@ -1,6 +1,7 @@
 <?php
 
 namespace csvparser\src;
+
 use RuntimeException;
 
 class CSVParser
@@ -26,7 +27,7 @@ class CSVParser
     {
         $result = [];
 
-        if (($handle = fopen($this->filePath,'rb')) !== false) {
+        if (($handle = fopen($this->filePath, 'rb')) !== false) {
             $this->headers = fgetcsv($handle);
 
             while (($data = fgetcsv($handle)) !== false) {
