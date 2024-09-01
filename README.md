@@ -7,11 +7,11 @@ CSV файлов. Парсер предоставляет методы для п
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/sk4rp/simple-csv-parser.git
+   git clone https://github.com/sk4rp/csvparser.git
 
 2. Перейдите в директорию проекта:
    ```bash
-   cd simple-csv-parser
+   cd csvparser
 
 3. Установите нужные зависимости:
    ```bash
