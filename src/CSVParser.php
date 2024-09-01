@@ -1,8 +1,7 @@
 <?php
 
 namespace csvparser\src;
-
-use Exception;
+use RuntimeException;
 
 class CSVParser
 {
@@ -12,17 +11,16 @@ class CSVParser
 
     /**
      * @param string $filePath
-     * @param array $data
-     * @throws Exception
      */
-    public function __construct(string $filePath, array $data)
+    public function __construct(string $filePath)
     {
         $this->filePath = $filePath;
         $this->data = $this->parse();
     }
 
+
     /**
-     * @throws Exception
+     * @return array
      */
     public function parse(): array
     {
@@ -39,40 +37,88 @@ class CSVParser
             }
 
             fclose($handle);
-        } else
-            throw new Exception('Cant open file for parsing');
+        } else {
+            throw new RuntimeException('Cant open file for parsing');
+        }
 
         return $result;
     }
 
+    /**
+     * @return array
+     */
     public function getHeaders(): array
     {
-        return [];
+        return $this->headers;
     }
 
+    /**
+     * @param string $columnName
+     * @return array
+     */
     public function getColumn(string $columnName): array
     {
-        return [];
+        $column = [];
+
+        foreach ($this->data as $row) {
+            if (isset($row[$columnName])) {
+                $column[] = $row[$columnName];
+            }
+        }
+
+        return $column;
     }
 
+    /**
+     * @param int $index
+     * @return array|null
+     */
     public function getRow(int $index): ?array
     {
-        return null;
+        return $this->data[$index] ?? null;
     }
 
+    /**
+     * @return int
+     */
     public function countRows(): int
     {
-        return 0;
+        return count($this->data);
     }
 
+    /**
+     * @param string $columnName
+     * @param string $value
+     * @return array
+     */
     public function searchByValue(string $columnName, string $value): array
     {
-        return [];
+        $result = [];
+
+        foreach ($this->data as $row) {
+            if (isset($row[$columnName]) && $row[$columnName] === $value) {
+                $result[] = $row;
+            }
+        }
+
+        return $result;
     }
 
+    /**
+     * @param string $columnName
+     * @param callable $callback
+     * @return array
+     */
     public function filterByColumn(string $columnName, callable $callback): array
     {
-        return [];
-    }
+        $result = [];
 
+        foreach ($this->data as $row) {
+            if (isset($row[$columnName]) && $callback($row[$columnName])) {
+                $result[] = $row;
+            }
+        }
+
+        return $result;
+    }
 }
