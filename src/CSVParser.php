@@ -26,7 +26,7 @@ class CSVParser
     {
         $result = [];
 
-        if (($handle = fopen(filename: $this->filePath, mode: 'rb')) !== false) {
+        if (($handle = fopen($this->filePath,'rb')) !== false) {
             $this->headers = fgetcsv($handle);
 
             while (($data = fgetcsv($handle)) !== false) {
